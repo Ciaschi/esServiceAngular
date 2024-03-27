@@ -1,0 +1,8 @@
+<table *ngIf="data">
+    <tr>
+        <td>Id</td><td>Name</td><td>Surname</td>
+    </tr>
+    <tr *ngFor="let a of data">
+        <td>{{a.id}}</td><td>{{a.firstName}}</td><td>{{a.lastName}}</td>
+    </tr>
+</table>

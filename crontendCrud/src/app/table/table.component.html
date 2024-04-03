@@ -2,7 +2,14 @@
     <tr>
         <td>Id</td><td>Name</td><td>Surname</td>
     </tr>
-    <tr *ngFor="let a of data">
-        <td>{{a.id}}</td><td>{{a.firstName}}</td><td>{{a.lastName}}</td>
+    <tr *ngFor="let a of data._embedded.employees">
+        <td>{{a.id - 10000}}</td><td>{{a.firstName}}</td><td>{{a.lastName}}</td><td><button (click)='deleteEmp(a.id)'>DELETE</button></td>
+    </tr>
+    <tr>
+        <td><button (click)="pageControl('fp')">FIRST PAGE</button></td><td><button (click)="pageControl('-p')">PREVIOUS PAGE</button></td><td><button (click)="pageControl('+p')">NEXT PAGE</button></td><td><button (click)="pageControl('lp')">LAST PAGE</button></td>
+    </tr>
+    <tr>
+        <td>Add new employee:</td><td><input type="text" value="Name" id="name"></td><td><input type="text" value="Surname" id="surname"></td>
     </tr>
 </table>
+

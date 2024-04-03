@@ -15,14 +15,36 @@ export class TableComponent implements OnInit{
 
   title = "Employee list";
   page = 0;
-  size = 10;
+  size = 20;
   data : any = null;
 
-  loadData = (page: number, size: number) => {
-    this.employeeService.get(page, size).subscribe(remoteData => {this.data = remoteData._embedded.employees; console.log(this.data)});
+  loadData = () => {
+    this.employeeService.get(this.page, this.size).subscribe((remoteData: { _embedded: { employees: any; }; }) => {this.data = remoteData; console.log(this.data)});
   } 
 
+  deleteEmp = (id : number) => {
+    this.employeeService.delete(id).subscribe((remoteData) => {this.loadData()});
+  }
+
   ngOnInit(){
-    this.loadData(this.page, this.size);
+    this.loadData();
+  }
+
+  pageControl = (c : String) => {
+    switch(c){
+      case "fp":
+        this.page = 0;
+        break;
+      case "-p":
+        this.page--;
+        break;
+      case "+p":
+        this.page++;
+        break;
+      case "lp":
+        this.page = 14999;
+        break;
+    }
+    this.loadData();
   }
 }
